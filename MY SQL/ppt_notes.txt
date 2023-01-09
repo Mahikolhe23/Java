@@ -1,0 +1,41 @@
+Unified architecture for representing and manipulating collections. 
+A collections framework contains three things
+Interfaces
+Implementations
+Algorithms
+
+list:List<E> features
+1. List represents ordered collection --- order is significant(It remembers the order of insertion)
+2. Allows null references
+3. Allows duplicates
+4. Supports index based operation
+
+set:The set is an interface available in the java.util package. The set interface extends the Collection interface. An unordered collection or list in which duplicates are not allowed is referred to as a collection interface. The set interface is used to create the mathematical set. The set interface use collection interface's methods to avoid the insertion of the same elements. SortedSet and NavigableSet are two interfaces that extend the set implementation.
+
+Map API
+HashMap<K,V> --
+1. un-sorted(not sorted as per Natural ordering or custom ordering based criteria) & un-ordered(doesn't remember order of insertion) map implementation class.
+2. No duplicate keys.
+3. Guarantees constant time performance --- via 2 attributes --initial cpacity & load factor.
+4. Allows null key reference(once).
+5. Inherently thrd unsafe.
+
+
+ArrayList
+low cost random access
+high cost insert and delete
+array that resizes if need be
+LinkedList
+sequential access
+low cost insert and delete
+high cost random access
+
+Most of the time you can use the implementations provided for you in the Java API.
+In case the existing implementations do not satisfy your needs, you can write your own by extending the abstract classes provided in the collections framework
+
+
+LL:
+Stores each element in a node
+Insertion and removal are inexpensive
+Linear traversal is inexpensive
+Random access is expensive

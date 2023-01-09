@@ -1,0 +1,414 @@
+1] - create all given tables
+Ans - mysql> select* from customer;
++-----+--------+---------+
+| cid | cname  | address |
++-----+--------+---------+
+|   1 | Nilima | Pimpari |
+|   2 | Ganesh | Pune    |
+|   3 | Pankaj | Mumbai  |
++-----+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select* from salesman;
++-----+--------+--------+
+| sid | sname  | adress |
++-----+--------+--------+
+|  10 | Rajesh | Mumbai |
+|  11 | Seema  | Pune   |
+|  13 | Rakhi  | Pune   |
++-----+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select* from vehicle;
++-----+------------+-----------+-------------+
+| vid | vname      | price     | description |
++-----+------------+-----------+-------------+
+|   1 | activa     |  80000.00 | Great       |
+|   2 | santro     | 800000.00 | Cool        |
+|   3 | Motor Bike | 100000.00 | Excellent   |
++-----+------------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select* from cust_vehicle;
++-----+-----+------+-----------+
+| cid | vid | sid  | buy_price |
++-----+-----+------+-----------+
+|   1 |   1 |   10 |  75000.00 |
+|   1 |   2 |   10 | 790000.00 |
+|   2 |   3 |   11 |  80000.00 |
+|   3 |   2 |   10 | 800000.00 |
+|   3 |   3 |   11 |  75000.00 |
++-----+-----+------+-----------+
+5 rows in set (0.00 sec)
+
+2] - create index on vehicle table based on price
+Ans - mysql> create index Price_ind on vehicle(price);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show index from vehicle;
++---------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table   | Non_unique | Key_name  | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++---------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| vehicle |          0 | PRIMARY   |            1 | vid         | A         |           2 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| vehicle |          1 | Price_ind |            1 | price       | A         |           3 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++---------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+2 rows in set (0.02 sec)
+
+3] -  find all customer name,vehicle name, salesman name, discount earn by all customer
+Ans - mysql> select c.cname , v.vname , s.sname , ((v.price - cv.buy_price)/v.price)*100 discount 
+from customer c,vehicle v,salesman s,cust_vehicle cv
+-> where c.cid=cv.cid and v.vid=cv.vid and s.sid=cv.sid ;
++--------+------------+--------+-----------+
+| cname  | vname      | sname  | discount  |
++--------+------------+--------+-----------+
+| Nilima | activa     | Rajesh |  6.250000 |
+| Nilima | santro     | Rajesh |  1.250000 |
+| Ganesh | Motor Bike | Seema  | 20.000000 |
+| Pankaj | santro     | Rajesh |  0.000000 |
+| Pankaj | Motor Bike | Seema  | 25.000000 |
++--------+------------+--------+-----------+
+5 rows in set (0.00 sec)
+
+4] - find all customer name,vehicle name,salesman name for all salesman who stays in pune
+Ans -mysql> select c.cname , v.vname , s.sname, s.adress from customer c,vehicle v , salesman s,cust_vehicle cv
+    -> where c.cid=cv.cid and v.vid=cv.vid and s.sid=cv.sid  and s.adress='pune';
++--------+------------+-------+--------+
+| cname  | vname      | sname | adress |
++--------+------------+-------+--------+
+| Ganesh | Motor Bike | Seema | Pune   |
+| Pankaj | Motor Bike | Seema | Pune   |
++--------+------------+-------+--------+
+2 rows in set (0.00 sec)
+
+5] - find how many customers bought motor bike
+Ans - mysql> select c.cname , v.vname  from customer c,vehicle v ,cust_vehicle cv
+    -> where c.cid=cv.cid and v.vid=cv.vid and v.vname="motor bike";
++--------+------------+
+| cname  | vname      |
++--------+------------+
+| Ganesh | Motor Bike |
+| Pankaj | Motor Bike |
++--------+------------+
+2 rows in set (0.00 sec)
+
+6] -create a view find_discount which displays output 
+-------to create view
+Ans - mysql> create view find_discount
+    -> as
+    -> select cname , vname , price , price-buy_price discount from customer c inner join cust_vehicle cv on c.cid=cv.cid inner join vehicle v on v.vid=cv.vid;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select* from find_discount;
++--------+------------+-----------+----------+
+| cname  | vname      | price     | discount |
++--------+------------+-----------+----------+
+| Nilima | activa     |  80000.00 |  5000.00 |
+| Nilima | santro     | 800000.00 | 10000.00 |
+| Ganesh | Motor Bike | 100000.00 | 20000.00 |
+| Pankaj | santro     | 800000.00 |     0.00 |
+| Pankaj | Motor Bike | 100000.00 | 25000.00 |
++--------+------------+-----------+----------+
+5 rows in set (0.00 sec)
+
+7] - find all customer name, vehicle name, salesman name, discount earn by all customer
+Ans - mysql> select cname,vname,price,price-buy_price discount from customer c inner join cust_vehicle cv on c.cid=cv.cid inner join vehicle v on v.vid=cv.vid;
++--------+------------+-----------+----------+
+| cname  | vname      | price     | discount |
++--------+------------+-----------+----------+
+| Nilima | activa     |  80000.00 |  5000.00 |
+| Nilima | santro     | 800000.00 | 10000.00 |
+| Ganesh | Motor Bike | 100000.00 | 20000.00 |
+| Pankaj | santro     | 800000.00 |     0.00 |
+| Pankaj | Motor Bike | 100000.00 | 25000.00 |
++--------+------------+-----------+----------+
+5 rows in set (0.00 sec)
+
+8] - create view my_hr to display empno,ename,job,comm for all employees who earn 
+commission
+Ans - mysql> create view my_hr as (select empno, ename ,job, comm from emp where comm is not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select* from my_hr;
++-------+-------+----------+--------+
+| empno | ename | job      | comm   |
++-------+-------+----------+--------+
+|  7499 | ALLEN | salesman | 300.00 |
+|  7521 | ward  | salesman | 500.00 |
++-------+-------+----------+--------+
+2 rows in set (0.01 sec)
+
+mysql> select* from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+10 rows in set (0.00 sec)
+
+
+
+9] -  create view mgr30 to display all employees from department 30
+Ans - mysql> create view mgr30  as (select* from emp where deptno=30);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from mgr30;
++-------+-------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+------------+--------+--------+
+|  7499 | ALLEN | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7521 | ward  | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
++-------+-------+----------+------+------------+---------+------------+--------+--------+
+2 rows in set (0.00 sec)
+
+10] - insert 3 employees in view mgr30 check whether insertion is possible
+Ans - mysql> insert into mgr30(empno,ename,job) values(7500,'Killer','Jugad');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into mgr30(empno,ename,job) values(7400,'RAMA','Sales')
+    -> ;
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into mgr30(empno,ename,job) values(7300,'RIMA','PURCHAse');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select* from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|  7300 | RIMA   | PURCHAse | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7400 | RAMA   | Sales    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7500 | Killer | Jugad    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 |    NULL |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3600.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+13 rows in set (0.00 sec)
+
+11] - insert 3 records in dept and display all records from dept
+Ans - mysql> insert into dept values(11,'PURCHASE','Mumbai');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into dept values(13,'PROJECT','NAGAR');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into dept values(19,'Production','Nashik');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     11 | PURCHASE   | Mumbai   |
+|     12 | HR         | Pune     |
+|     13 | PROJECT    | NAGAR    |
+|     19 | Production | Nashik   |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+8 rows in set (0.00 sec)
+
+12] - use rollback command check what happens
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+13] - do the following
+Ans - mysql> select * from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|   100 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   101 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   102 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7300 | RIMA   | PURCHAse | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7400 | RAMA   | Sales    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7500 | Killer | Jugad    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 |    NULL |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3600.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into emp(empno) values(101)
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp(empno) values(100)
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp(empno) values(102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into emp(empno) values(103);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp(empno) values(104);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp(empno) values(105);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint b;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from emp where empno=100;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> delete from emp where empno=104;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> rollback to b;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select* from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|   100 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   101 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   102 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   103 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   104 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   105 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7300 | RIMA   | PURCHAse | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7400 | RAMA   | Sales    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7500 | Killer | Jugad    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 |    NULL |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3600.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+19 rows in set (0.00 sec)
+
+mysql> rollback to a;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select* from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|   100 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   101 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   102 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7300 | RIMA   | PURCHAse | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7400 | RAMA   | Sales    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7500 | Killer | Jugad    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 |    NULL |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3600.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+16 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select* from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|   100 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   101 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|   102 | NULL   | NULL     | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7300 | RIMA   | PURCHAse | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7400 | RAMA   | Sales    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7500 | Killer | Jugad    | NULL | NULL       |    NULL |       1000 |   NULL |   NULL |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 |    NULL |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3600.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+16 rows in set (0.00 sec)
+
+mysql> rollback to a;
+ERROR 1305 (42000): SAVEPOINT a does not exist
+
+14] - create a procedure getMin(deptno,minsal) to find minimum salary of given table
+Ans - 
+delimiter $$
+create procedure getMin( in pdeptno int , out pminsal decimal(9,2))
+begin
+select min(sal) into pminsal 
+from emp where deptno=pdeptno;
+end$$
+delimiter ;
+
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> delimiter ;
+
+mysql> call getMin(10,@c);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select @c;
++---------+
+| @c      |
++---------+
+| 1495.00 |
++---------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

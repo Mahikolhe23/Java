@@ -1,0 +1,1181 @@
+Practice DQL statement 
+Write SQL statement for the following 
+
+Q 1 . To find all managers with salary >1500 
+Ans – mysql> select*
+    -> from emp
+    -> where job='manager' and sal>1500;
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
++-------+-------+---------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+
+Q2 .list all employees with sal >1200 and < 2000 .
+Ans –mysql> select*
+    -> from emp
+    -> where sal between 1201 and 1999;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+5 rows in set (0.00 sec)
+
+
+Q3 - list all employees with sal is 1600 or sal is 800 or sal is 1900 
+Ans – mysql> select*
+    -> from emp
+    -> where sal=1600 or sal=800 or sal=1900;
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1980-12-17 |  800.00 |   NULL |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+
+Q4 - list all employees with R at second last position in name 
+Ans – mysql> select*
+    -> from emp
+    -> where ename regexp '.*r.$';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7521 | WARD  | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7782 | CLARK | MANAGER  | 7839 | 1981-06-09 | 2450.00 |   NULL |     10 |
+|  7902 | FORD  | ANALYST  | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+-------+----------+------+------------+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+Q5 - List all employees with name starts with A and ends with N
+Ans –  mysql> select*
+    -> from emp
+    -> where ename regexp '^a.*n$';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+1 row in set (0.00 sec)
+
+Q2. Solve following 
+Q1. list all employees with salary > 1250 and dept no=30 
+Ans - mysql> select*
+    -> from emp
+    -> where sal>1250 and deptno=30;
++-------+--------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
++-------+--------+----------+------+------------+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+Q2. list all employees with salary >=1250 and <= 3000 
+Ans – mysql> select*
+    -> from emp
+    -> where sal between 1250 and 3000;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+10 rows in set (0.00 sec)
+
+Q3. list all employees with salary >1250 and < 3000 
+Ans – mysql> select*
+    -> from emp
+    -> where sal between 1251 and 2999;
++-------+--------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-09 | 2450.00 |   NULL |     10 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+--------+--------+
+6 rows in set (0.00 sec)
+
+Q4. list all employees with salary either equal to 3000 or 1250 or 2500 
+Ans –mysql> select*
+    -> from emp
+    -> where sal=1250 or sal = 3000 or sal =2500;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+Q5. list all employee with name=SMITH 
+Ans –mysql> select*
+    -> from emp
+    -> where ename='smith';
++-------+-------+-------+------+------------+--------+------+--------+
+| EMPNO | ENAME | JOB   | MGR  | HIREDATE   | SAL    | COMM | DEPTNO |
++-------+-------+-------+------+------------+--------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 | 800.00 | NULL |     20 |
++-------+-------+-------+------+------------+--------+------+--------+
+1 row in set (0.00 sec)
+
+Q6. list all employees with name starting with S 
+Ans –mysql> select *
+    -> from emp
+    -> where ename regexp '^s';
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+2 rows in set (0.00 sec)
+
+Q7. list all employees with name ending with S 
+Ans – mysql> select *
+    -> from emp
+    -> where ename regexp '.*s$';
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES | CLERK   | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
++-------+-------+---------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+Q8. list all employees with name contains I at 2nd position 
+Ans –mysql> select*
+    -> from emp
+    -> where ename regexp '^.i.*';
++-------+--------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+2 rows in set (0.00 sec)
+
+Q9. list all employees with name starts with A ends with N and somewhere in between L is there 
+Ans –mysql> select*
+    -> from emp
+    -> where ename regexp '^al.*n$';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+1 row in set (0.00 sec)
+
+Q10. list all employees with name starts with A and B at 3 rd position and P at second last position 
+Ans – mysql> select*
+    -> from emp
+    -> where ename regexp '^a.b.*p.$';
+Empty set (0.00 sec)
+
+Q11. List all employees with name starts with either A or starts with S or starts with W
+Ans –mysql> select*
+    -> from emp
+    -> where ename regexp '^[asw]';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1980-12-17 |  800.00 |   NULL |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7521 | WARD  | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7788 | SCOTT | ANALYST  | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7876 | ADAMS | CLERK    | 7788 | 1983-01-12 | 1100.00 |   NULL |     20 |
++-------+-------+----------+------+------------+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+
+practice Aggregate functions
+ 
+Q12. find max sal and min sal for each job 
+Ans – mysql> select max(sal) , min(sal)
+    -> from emp
+    -> group by job;
++----------+----------+
+| max(sal) | min(sal) |
++----------+----------+
+|  1300.00 |   800.00 |
+|  1600.00 |  1250.00 |
+|  2975.00 |  2450.00 |
+|  3000.00 |  3000.00 |
+|  5000.00 |  5000.00 |
++----------+----------+
+5 rows in set (0.00 sec)
+ 
+Q13. find how many employess have not received commission 
+Ans –mysql> select count(*)
+    ->  from emp
+    -> where comm is null or comm=0;
++----------+
+| count(*) |
++----------+
+|       11 |
++----------+
+1 row in set (0.00 sec)
+
+Q14. find sum of sal of all employees working in dept no 10 
+Ans –mysql> select sum(sal) sum_of_salary , deptno
+    -> from emp
+    -> where deptno = 10
+    -> ;
++---------------+--------+
+| sum_of_salary | deptno |
++---------------+--------+
+|       8750.00 |     10 |
++---------------+--------+
+1 row in set (0.00 sec)
+
+Q15. find maximum salary,average sal for each job in every department 
+Ans –mysql> select max(sal) Maximum_salary , ceil(avg(sal)) Average_salary , job, deptno
+    -> from emp
+    -> group by job , deptno;
++----------------+----------------+-----------+--------+
+| Maximum_salary | Average_salary | job       | deptno |
++----------------+----------------+-----------+--------+
+|        1100.00 |            950 | CLERK     |     20 |
+|        1600.00 |           1400 | SALESMAN  |     30 |
+|        2975.00 |           2975 | MANAGER   |     20 |
+|        2850.00 |           2850 | MANAGER   |     30 |
+|        2450.00 |           2450 | MANAGER   |     10 |
+|        3000.00 |           3000 | ANALYST   |     20 |
+|        5000.00 |           5000 | PRESIDENT |     10 |
+|         950.00 |            950 | CLERK     |     30 |
+|        1300.00 |           1300 | CLERK     |     10 |
++----------------+----------------+-----------+--------+
+9 rows in set (0.00 sec)
+
+Q 16. find max salary for every department if deptno is > 15 and arrange data in deptno order. 
+Ans –mysql> select max(sal) Maximum_sal , deptno
+    -> from emp
+    -> where deptno>15
+    -> group by deptno;
++-------------+--------+
+| Maximum_sal | deptno |
++-------------+--------+
+|     3000.00 |     20 |
+|     2850.00 |     30 |
++-------------+--------+
+2 rows in set (0.00 sec)
+
+Q 17. find sum salary for every department if sum is > 3000 
+Ans – mysql> select sum(sal) Total_sal, deptno
+    -> from emp
+    -> group by deptno
+    -> having sum(sal)>3000;
++-----------+--------+
+| Total_sal | deptno |
++-----------+--------+
+|  10875.00 |     20 |
+|   9400.00 |     30 |
+|   8750.00 |     10 |
++-----------+--------+
+3 rows in set (0.00 sec)
+
+Q 18. list all department which has minimum 5 employees.
+Ans –mysql> select* , count(*)
+    -> from emp
+    -> group by deptno
+    -> having count(*)>=5;
++-------+-------+----------+------+------------+---------+--------+--------+----------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO | count(*) |
++-------+-------+----------+------+------------+---------+--------+--------+----------+
+|  7369 | SMITH | CLERK    | 7902 | 1980-12-17 |  800.00 |   NULL |     20 |        5 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |        6 |
++-------+-------+----------+------+------------+---------+--------+--------+----------+
+2 rows in set (0.00 sec)
+ 
+Q19. count how many employees earn salary more than 2000 in each job
+Ans – mysql> select count(*)
+    -> from emp
+    -> where sal>2000;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+ 
+
+Q 20. list all enames and jobs in small case letter
+Ans – mysql> select* , lower(job) , lower(ename)
+    -> from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+------------+--------------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO | lower(job) | lower(ename) |
++-------+--------+-----------+------+------------+---------+---------+--------+------------+--------------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 | clerk      | smith        |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 | salesman   | allen        |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 | salesman   | ward         |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 | manager    | jones        |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 | salesman   | martin       |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 | manager    | blake        |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 | manager    | clark        |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 | analyst    | scott        |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 | president  | king         |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 | salesman   | turner       |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 | clerk      | adams        |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 | clerk      | james        |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 | analyst    | ford         |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 | clerk      | miller       |
++-------+--------+-----------+------+------------+---------+---------+--------+------------+--------------+
+14 rows in set (0.01 sec)
+
+Q21 -  list all names and jobs so that the length of name should be 15 if it is smaller then add spaces to left
+Ans – mysql> select lpad(ename , 15 ,' ') , lpad(job,15 , ' ')
+    -> from emp;
++-----------------------+--------------------+
+| lpad(ename , 15 ,' ') | lpad(job,15 , ' ') |
++-----------------------+--------------------+
+|           SMITH       |           CLERK    |
+|           ALLEN       |        SALESMAN    |
+|            WARD       |        SALESMAN    |
+|           JONES       |         MANAGER    |
+|          MARTIN       |        SALESMAN    |
+|           BLAKE       |         MANAGER    |
+|           CLARK       |         MANAGER    |
+|           SCOTT       |         ANALYST    |
+|            KING       |       PRESIDENT    |
+|          TURNER       |        SALESMAN    |
+|           ADAMS       |           CLERK    |
+|           JAMES       |           CLERK    |
+|            FORD       |         ANALYST    |
+|          MILLER       |           CLERK    |
++-----------------------+--------------------+
+14 rows in set (0.00 sec)
+
+Q22 - display min sal,max sal, average sal for all employees working under same manager
+Ans – mysql> select min(sal) ,max(sal) , avg(sal)
+    -> from emp
+    -> where job!=mgr
+    -> group by mgr;
++----------+----------+-------------+
+| min(sal) | max(sal) | avg(sal)    |
++----------+----------+-------------+
+|   800.00 |   800.00 |  800.000000 |
+|   950.00 |  1600.00 | 1310.000000 |
+|  2450.00 |  2975.00 | 2758.333333 |
+|  3000.00 |  3000.00 | 3000.000000 |
+|  1100.00 |  1100.00 | 1100.000000 |
+|  1300.00 |  1300.00 | 1300.000000 |
++----------+----------+-------------+
+6 rows in set, 14 warnings (0.00 sec)
+
+Q23 - find sum of total earnings(sal+comm), average of sal+comm for all employees who earn sal > 2000 and work in either dept no 10 or 20
+Ans – mysql> select* , sum(sal+ifnull(comm,0))total_earning , avg(sal+ifnull(comm,0)) avg
+    -> from emp
+    -> where sal>2000 and deptno in(10,20)
+    -> group by ename;
++-------+-------+-----------+------+------------+---------+------+--------+---------------+-------------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO | total_earning | avg         |
++-------+-------+-----------+------+------------+---------+------+--------+---------------+-------------+
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |       2975.00 | 2975.000000 |
+|  7782 | CLARK | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |       2450.00 | 2450.000000 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |       3000.00 | 3000.000000 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |       5000.00 | 5000.000000 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |       3000.00 | 3000.000000 |
++-------+-------+-----------+------+------------+---------+------+--------+---------------+-------------+
+5 rows in set (0.00 sec)
+
+
+Q24 - list all employees who joined in Aug 1980 and salary is >1500 and < 2500
+Ans – mysql> select* from emp
+    -> where month(hiredate)=8 and year(hiredate)=1980 and sal between 1501 and 2499;
+Empty set (0.00 sec)
+
+
+Q25 -  list all employees joined in either aug or may or dec
+Ans – 
+mysql> select*
+    -> from emp
+    -> where month(hiredate)=8 or month(hiredate)=5 or month(hiredate) = 12;
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7900 | JAMES | CLERK   | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+Q26 - display name and hiredate in dd/mm/yy format for all employees whose job is clerk and they earn some commission.
+Ans – mysql> select ename , date_format(hiredate, '%d/%m/%y')hiredate from emp
+    -> where job='clerk' and comm is not null;
+Empty set (0.00 sec)
+
+Q27 - list empcode,empno,name and job for each employee. (note :empcode is 3 to 5 characters from name and last 2 characters of job)
+Ans – mysql> select concat(substr(ename,1,3),substr(job,length(job)-2,2)) empcode , empno , ename , job from emp;
++---------+-------+--------+-----------+
+| empcode | empno | ename  | job       |
++---------+-------+--------+-----------+
+| SMIER   |  7369 | SMITH  | CLERK     |
+| ALLMA   |  7499 | ALLEN  | SALESMAN  |
+| WARMA   |  7521 | WARD   | SALESMAN  |
+| JONGE   |  7566 | JONES  | MANAGER   |
+| MARMA   |  7654 | MARTIN | SALESMAN  |
+| BLAGE   |  7698 | BLAKE  | MANAGER   |
+| CLAGE   |  7782 | CLARK  | MANAGER   |
+| SCOYS   |  7788 | SCOTT  | ANALYST   |
+| KINEN   |  7839 | KING   | PRESIDENT |
+| TURMA   |  7844 | TURNER | SALESMAN  |
+| ADAER   |  7876 | ADAMS  | CLERK     |
+| JAMER   |  7900 | JAMES  | CLERK     |
+| FORYS   |  7902 | FORD   | ANALYST   |
+| MILER   |  7934 | MILLER | CLERK     |
++---------+-------+--------+-----------+
+14 rows in set (0.00 sec)
+
+Q28 - display thousand separator and $ symbol for commission if it is null then display it as 0 for all employees whose name starts with A and ends with N
+Ans – mysql> select ename , concat(format(sal,2),'$')salary from emp
+    -> where ename regexp '^a.*n$';
++-------+-----------+
+| ename | salary    |
++-------+-----------+
+| ALLEN | 1,600.00$ |
++-------+-----------+
+1 row in set (0.00 sec)
+
+Q29 - Display empid,name,sal,comm,remark Remark should base on following conditions comm >= 600 "excellent Keep it up" if it < 600 or not null "good" otherwise "Need improvement"
+Ans – mysql> select ename , job, comm ,
+    -> case
+    -> when comm>=600 then "excellent keep it up"
+    -> when comm <600 and comm is not null then "good"
+    -> else "need improvement"
+    -> end as remark
+    -> from emp;
++--------+-----------+---------+----------------------+
+| ename  | job       | comm    | remark               |
++--------+-----------+---------+----------------------+
+| SMITH  | CLERK     |    NULL | need improvement     |
+| ALLEN  | SALESMAN  |  300.00 | good                 |
+| WARD   | SALESMAN  |  500.00 | good                 |
+| JONES  | MANAGER   |    NULL | need improvement     |
+| MARTIN | SALESMAN  | 1400.00 | excellent keep it up |
+| BLAKE  | MANAGER   |    NULL | need improvement     |
+| CLARK  | MANAGER   |    NULL | need improvement     |
+| SCOTT  | ANALYST   |    NULL | need improvement     |
+| KING   | PRESIDENT |    NULL | need improvement     |
+| TURNER | SALESMAN  |    0.00 | good                 |
+| ADAMS  | CLERK     |    NULL | need improvement     |
+| JAMES  | CLERK     |    NULL | need improvement     |
+| FORD   | ANALYST   |    NULL | need improvement     |
+| MILLER | CLERK     |    NULL | need improvement     |
++--------+-----------+---------+----------------------+
+14 rows in set (0.00 sec)
+
+Q30 – Display empid, name, deptno and department name by using following conditions. dept 10 then "Hr" if 20 then "Admin" if 30 then "accounts" otherwise purchase
+Ans – mysql> select empno , ename , deptno, case
+    -> when deptno=10 then  "HR"
+    -> when deptno=20 then "Admin"
+    -> when deptno=30 then "accounts"
+    -> else "purchase"
+    -> end as department
+    -> from emp;
++-------+--------+--------+------------+
+| empno | ename  | deptno | department |
++-------+--------+--------+------------+
+|  7369 | SMITH  |     20 | Admin      |
+|  7499 | ALLEN  |     30 | accounts   |
+|  7521 | WARD   |     30 | accounts   |
+|  7566 | JONES  |     20 | Admin      |
+|  7654 | MARTIN |     30 | accounts   |
+|  7698 | BLAKE  |     30 | accounts   |
+|  7782 | CLARK  |     10 | HR         |
+|  7788 | SCOTT  |     20 | Admin      |
+|  7839 | KING   |     10 | HR         |
+|  7844 | TURNER |     30 | accounts   |
+|  7876 | ADAMS  |     20 | Admin      |
+|  7900 | JAMES  |     30 | accounts   |
+|  7902 | FORD   |     20 | Admin      |
+|  7934 | MILLER |     10 | HR         |
++-------+--------+--------+------------+
+14 rows in set (0.00 sec)
+
+
+Topic ----------------- create Table, DML , subquery and joins
+Q31 -  Practice creating following tables
+create table mydept_DAC ( deptid number primary key, dname varchar(20) not null unique, dloc varchar(20) ) 
+create table myemployee ( empno number(5) primary key, fname varchar(15) not null, mname varchar(15), lname varchar(15) not null, sal number(9,2) check(sal >=1000), doj date default sysdate, passportnum varchar(15) unique, deptno number constraint fk_deptno references mydept_DAC(deptid) on delete cascade )
+Ans –
+A - create table mydept_dac(deptid int primary key , dname varchar(20) not null unique , dloc varchar(20));
+Query OK, 0 rows affected (0.24 sec)
+mysql> desc mydept_dac;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| deptid | int         | NO   | PRI | NULL    |       |
+| dname  | varchar(20) | NO   | UNI | NULL    |       |
+| dloc   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+B – mysql> create table myemployee(empno int primary key, fname varchar(15) not null, mname varchar(15), iname varchar(15) not null ,
+    -> sal decimal(9,2) check(sal>=2000), doj date default (sysdate()), passportno varchar(15) unique,
+    -> deptid int ,
+    -> constraint deptid_fk foreign key (deptid) references mydept_dac(deptid));
+Query OK, 0 rows affected (0.13 sec)
+mysql> desc myemployee;
++------------+--------------+------+-----+-----------+-------------------+
+| Field      | Type         | Null | Key | Default   | Extra             |
++------------+--------------+------+-----+-----------+-------------------+
+| empno      | int          | NO   | PRI | NULL      |                   |
+| fname      | varchar(15)  | NO   |     | NULL      |                   |
+| mname      | varchar(15)  | YES  |     | NULL      |                   |
+| iname      | varchar(15)  | NO   |     | NULL      |                   |
+| sal        | decimal(9,2) | YES  |     | NULL      |                   |
+| doj        | date         | YES  |     | sysdate() | DEFAULT_GENERATED |
+| passportno | varchar(15)  | YES  | UNI | NULL      |                   |
+| deptid     | int          | YES  | MUL | NULL      |                   |
++------------+--------------+------+-----+-----------+-------------------+
+8 rows in set (0.00 sec)
+
+Q32 – . Create following tables Student, Course Student (sid,sname) ---------------- sid ---primary key Course(cid,cname)-------------- cid ---primary ke Marks(studid,courseid,marks) Sample data for marks table studid,courseid,marks 1 1 99 1 3 98 2 1 95 2 2 97 create table marks( studid number, courseid number, marks number, constraint pk primary key(studid,courseid), constraint fk_sid foreign key (studid) references student(sid) on delete cascade, constraint fk_cid foreign key (courseid) references course(cid) )
+Ans – mysql> select * from student;
++-----+-------+
+| sid | sname |
++-----+-------+
+|   1 | dac   |
+|   2 | mahi  |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from course;
++-----+-------+
+| cid | cname |
++-----+-------+
+|   1 | dac   |
+|   2 | dbda  |
++-----+-------+
+2 rows in set (0.00 sec)
+mysql> select* from marks;
++-----+-----+-------+
+| sid | cid | marks |
++-----+-----+-------+
+|   1 |   1 |    99 |
+|   1 |   2 |    98 |
+|   2 |   1 |    98 |
++-----+-----+-------+
+3 rows in set (0.00 sec)
+
+Q33 - Create empty table emp10 with table structure same as emp table. create table emp10 as ( select * from emp where 1=2; )
+Ans – mysql> create table emp10 as
+    -> (select* from emp where 1=2);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| bonus          |
+| course         |
+| dept           |
+| dummy          |
+| emp            |
+| emp10          |
+| marks          |
+| mydept_dac     |
+| myemployee     |
+| salgrade       |
+| student        |
++----------------+
+11 rows in set (0.00 sec)
+
+Q 34 - Solve following using alter table add primary key constraint on emp,dept,salgrade emp ----→ empno dept---→ deptno salgrade---→ grade add foreign key constarint in emp deptno --->> dept(deptno) add new column in emp table netsal with constraint default 1000f
+Ans –mysql> alter table emp
+    -> add constraint pk primary key (empno);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table dept
+    -> add constraint pk primary key (deptno);
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table salgrade
+    -> add constraint pk primary key (grade);
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table emp
+    -> add constraint fk_deptno foreign key (deptno) references dept(deptno);
+Query OK, 14 rows affected (0.13 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+mysql> alter table emp
+    -> add net_salary int default 1000 after sal;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| EMPNO      | int          | NO   | PRI | NULL    |       |
+| ENAME      | varchar(10)  | YES  |     | NULL    |       |
+| JOB        | varchar(9)   | YES  |     | NULL    |       |
+| MGR        | int          | YES  |     | NULL    |       |
+| HIREDATE   | date         | YES  |     | NULL    |       |
+| SAL        | decimal(7,2) | YES  |     | NULL    |       |
+| net_salary | int          | YES  |     | 1000    |       |
+| COMM       | decimal(7,2) | YES  |     | NULL    |       |
+| DEPTNO     | int          | YES  | MUL | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+Q35 - Update employee sal ---- increase sal of each employee by 15 % sal +comm, change the job to manager and mgr to 7777 for all employees in deptno 10.
+Ans – mysql> update emp
+    -> set sal=sal+(0.15*(sal+ifnull(comm,0))), job = 'manager', mgr=7777 where deptno=10;
+Query OK, 3 rows affected (0.04 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select* from emp;
++-------+--------+----------+------+------------+---------+------------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |       1000 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |       1000 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |       1000 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 |       1000 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |       1000 |    NULL |     30 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |       1000 |    NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |       1000 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |       1000 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |       1000 |    NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+---------+--------+
+14 rows in set (0.00 sec)
+
+Q36 - change job of smith to senior clerk
+Ans – mysql> update emp
+    -> set job = "S-clerk" where ename = 'smith';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Q37 – increase salary of all employees by 15% if they are earning some commission
+Ans – mysql> select * , sal+0.15 * sal total_sal from emp
+    -> where comm is not null;
++-------+--------+----------+------+------------+---------+------------+---------+--------+-----------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM    | DEPTNO | total_sal |
++-------+--------+----------+------+------------+---------+------------+---------+--------+-----------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |       1000 |  300.00 |     30 | 1840.0000 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |       1000 |  500.00 |     30 | 1437.5000 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 |       1000 | 1400.00 |     30 | 1437.5000 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |       1000 |    0.00 |     30 | 1725.0000 |
++-------+--------+----------+------+------------+---------+------------+---------+--------+-----------+
+4 rows in set (0.00 sec)
+
+Q38 -  list all employees with sal>smith's sal
+Ans – mysql> select* from emp
+    -> where sal> ( select sal from emp where ename='smith');
++-------+--------+----------+------+------------+---------+------------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |       1000 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |       1000 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 |       1000 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |       1000 |    NULL |     30 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |       1000 |    NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |       1000 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |       1000 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |       1000 |    NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+---------+--------+
+13 rows in set (0.00 sec)
+
+
+
+Q39 - list all employees who are working in smith's department
+Ans – mysql> select* from emp
+    -> where deptno=(select deptno from emp where ename='smith');
++-------+-------+---------+------+------------+---------+------------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | net_salary | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------------+------+--------+
+|  7369 | SMITH | S-clerk | 7902 | 1980-12-17 |  800.00 |       1000 | NULL |     20 |
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 |       1000 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 |       1000 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 |       1000 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 |       1000 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------------+------+--------+
+5 rows in set (0.01 sec)
+
+Q40 – list all employees with sal < rajan's sal and salary > revati's sal
+Ans – mysql> select * from emp
+    -> where sal<(select sal from emp where ename='ranjan') and sal>(select sal from emp where ename = 'revati');
+Empty set (0.00 sec)
+
+
+Q41 -  delete all employees working in alan's department
+Ans – mysql> delete from emp 
+where deptno=(select* from emp where ename='allen');
+Query OK, 6 rows affected (0.02 sec)
+
+Q42 - change salary of Alan to the salary of Miller.
+Ans - mysql> update emp
+    -> set sal =( select sal from (select* from emp) e where ename= 'miller') where ename = 'allen';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+9 rows in set (0.00 sec)
+
+
+Q43 change salary of all emplees who working in Wall's department to the salary of Miller.
+Ans - mysql> update emp
+    -> set sal= (select sal from(select* from emp) e where ename='miller')
+    -> where deptno = (select deptno from(select* from emp) m where ename ='ward');
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 2  Changed: 1  Warnings: 0
+mysql> select* from emp;
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|  7369 | SMITH  | S-clerk  | 7902 | 1980-12-17 |  800.00 |       1000 |   NULL |     20 |
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+10 rows in set (0.00 sec)
+
+
+Q44 list all employees with salary > either Smith's salary or alan's sal
+Ans - mysql> select* from emp
+    -> where sal>any (select sal from(select* from emp) e where ename in ('smith','allen'));
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | net_salary | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+|  7499 | ALLEN  | salesman | 7698 | 1981-02-18 | 1495.00 |       1000 | 300.00 |     30 |
+|  7521 | ward   | salesman | 7698 | 1981-02-22 | 1495.00 |       1000 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |       1000 |   NULL |     20 |
+|  7782 | CLARK  | manager  | 7777 | 1981-06-09 | 2817.50 |       1000 |   NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |       1000 |   NULL |     20 |
+|  7839 | KING   | manager  | 7777 | 1981-11-17 | 5750.00 |       1000 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |       1000 |   NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |       1000 |   NULL |     20 |
+|  7934 | MILLER | manager  | 7777 | 1982-01-23 | 1495.00 |       1000 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+------------+--------+--------+
+9 rows in set (0.00 sec)
+
+
+Q45 list all employees who earn more than average sal of dept 10
+Ans - mysql> select * from emp e
+    -> where sal>(select avg(sal)  from emp where deptno=10);
++-------+-------+---------+------+------------+---------+------------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | net_salary | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------------+------+--------+
+|  7839 | KING  | manager | 7777 | 1981-11-17 | 5750.00 |       1000 | NULL |     10 |
++-------+-------+---------+------+------------+---------+------------+------+--------+
+1 row in set (0.00 sec)
+
+
+Q46 list all employees who earn more than average sal of Alan's department
+Ans -mysql> select * from emp e
+    -> where sal>(select avg(sal) from emp m where deptno = (select deptno from emp where ename = 'allen'));
++-------+-------+-----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+-----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK | MANAGER   | 7839 | 1981-06-09 | 2450.00 |   NULL |     10 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 |   NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+-------+-----------+------+------------+---------+--------+--------+
+7 rows in set (0.00 sec)
+
+
+Q47 - list all employees who are working in purchase department
+Ans - mysql> select* from emp e
+    -> where deptno=(select deptno from dept where dname='purchase');
+Empty set (0.02 sec)
+
+Q48 - list all employees who earn more than average salary of their own department
+Ans - mysql> select* from emp e
+    -> where sal>(select avg(sal) from emp m
+    -> where m.deptno=e.deptno);
++-------+-------+-----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+-----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 |   NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+-------+-----------+------+------------+---------+--------+--------+
+6 rows in set (0.00 sec)
+
+Q49 - list all employees who earn sal < than their managers salary
+Ans - mysql> select e.empno,e.ename,e.mgr,e.sal,m.sal mgrsal , m.empno mgrno,m.ename mgrname from emp e inner join emp m on e.mgr=m.empno where e.sal<m.sal;
++-------+--------+------+---------+---------+-------+---------+
+| empno | ename  | mgr  | sal     | mgrsal  | mgrno | mgrname |
++-------+--------+------+---------+---------+-------+---------+
+|  7900 | JAMES  | 7698 |  950.00 | 2850.00 |  7698 | BLAKE   |
+|  7844 | TURNER | 7698 | 1500.00 | 2850.00 |  7698 | BLAKE   |
+|  7654 | MARTIN | 7698 | 1250.00 | 2850.00 |  7698 | BLAKE   |
+|  7521 | WARD   | 7698 | 1250.00 | 2850.00 |  7698 | BLAKE   |
+|  7499 | ALLEN  | 7698 | 1600.00 | 2850.00 |  7698 | BLAKE   |
+|  7934 | MILLER | 7782 | 1300.00 | 2450.00 |  7782 | CLARK   |
+|  7876 | ADAMS  | 7788 | 1100.00 | 3000.00 |  7788 | SCOTT   |
+|  7782 | CLARK  | 7839 | 2450.00 | 5000.00 |  7839 | KING    |
+|  7698 | BLAKE  | 7839 | 2850.00 | 5000.00 |  7839 | KING    |
+|  7566 | JONES  | 7839 | 2975.00 | 5000.00 |  7839 | KING    |
+|  7369 | SMITH  | 7902 |  800.00 | 3000.00 |  7902 | FORD    |
++-------+--------+------+---------+---------+-------+---------+
+11 rows in set (0.00 sec)
+
+
+Q50 - list all employees who are earning more than average salary of their job
+Ans - mysql> select* from emp e
+    -> where sal>(select avg(sal) from emp m where m.job=e.job);
++-------+--------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |   NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+--------+--------+
+6 rows in set (0.00 sec)
+
+
+Q51 - display employee name and department
+Ans - mysql> select emp.ename , dept.dname from emp , dept where emp.deptno=dept.deptno;
++--------+------------+
+| ename  | dname      |
++--------+------------+
+| SMITH  | RESEARCH   |
+| ALLEN  | SALES      |
+| WARD   | SALES      |
+| JONES  | RESEARCH   |
+| MARTIN | SALES      |
+| BLAKE  | SALES      |
+| CLARK  | ACCOUNTING |
+| SCOTT  | RESEARCH   |
+| KING   | ACCOUNTING |
+| TURNER | SALES      |
+| ADAMS  | RESEARCH   |
+| JAMES  | SALES      |
+| FORD   | RESEARCH   |
+| MILLER | ACCOUNTING |
++--------+------------+
+14 rows in set (0.00 sec)
+
+
+Q52 - display empno,name,department name and grade (use emp,dept and salgrade table)
+Ans - mysql> select emp.empno, emp.ename, dept.dname , grade from emp,dept,salgrade where emp.deptno=dept.deptno and emp.sal between salgrade.losal and salgrade.hisal;
++-------+--------+------------+-------+
+| empno | ename  | dname      | grade |
++-------+--------+------------+-------+
+|  7900 | JAMES  | SALES      |     1 |
+|  7876 | ADAMS  | RESEARCH   |     1 |
+|  7369 | SMITH  | RESEARCH   |     1 |
+|  7934 | MILLER | ACCOUNTING |     2 |
+|  7654 | MARTIN | SALES      |     2 |
+|  7521 | WARD   | SALES      |     2 |
+|  7844 | TURNER | SALES      |     3 |
+|  7499 | ALLEN  | SALES      |     3 |
+|  7902 | FORD   | RESEARCH   |     4 |
+|  7788 | SCOTT  | RESEARCH   |     4 |
+|  7782 | CLARK  | ACCOUNTING |     4 |
+|  7698 | BLAKE  | SALES      |     4 |
+|  7566 | JONES  | RESEARCH   |     4 |
+|  7839 | KING   | ACCOUNTING |     5 |
++-------+--------+------------+-------+
+14 rows in set (0.06 sec)
+
+
+Q53 list all employees number,name, mgrno and manager name
+Ans - mysql> select e.empno,e.ename,e.mgr, m.empno mgrno,m.ename mgrname from emp e inner join emp m on e.mgr=m.empno;
++-------+--------+------+-------+---------+
+| empno | ename  | mgr  | mgrno | mgrname |
++-------+--------+------+-------+---------+
+|  7902 | FORD   | 7566 |  7566 | JONES   |
+|  7788 | SCOTT  | 7566 |  7566 | JONES   |
+|  7900 | JAMES  | 7698 |  7698 | BLAKE   |
+|  7844 | TURNER | 7698 |  7698 | BLAKE   |
+|  7654 | MARTIN | 7698 |  7698 | BLAKE   |
+|  7521 | WARD   | 7698 |  7698 | BLAKE   |
+|  7499 | ALLEN  | 7698 |  7698 | BLAKE   |
+|  7934 | MILLER | 7782 |  7782 | CLARK   |
+|  7876 | ADAMS  | 7788 |  7788 | SCOTT   |
+|  7782 | CLARK  | 7839 |  7839 | KING    |
+|  7698 | BLAKE  | 7839 |  7839 | KING    |
+|  7566 | JONES  | 7839 |  7839 | KING    |
+|  7369 | SMITH  | 7902 |  7902 | FORD    |
++-------+--------+------+-------+---------+
+13 rows in set (0.00 sec)
+
+Q54 - create following tables and solve following questions(primary keys are marked in yellow.
+
+mysql> create table salesman (sid int primary key , sname varchar(25), address varchar(25));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table category (cid int primary key , cname varchar(25) , description varchar(25));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> create table product( pid int primary key, pname varchar(25) , price decimal(9,2) check(price>0), Qty int check(Qty>0) , cid int , sid int,
+    -> constraint fk_cid foreign key(cid) references category(cid) on delete cascade ,
+    -> constraint fk_sid foreign key(sid) references salesman(sid) on delete cascade);
+Query OK, 0 rows affected (0.16 sec)
+
+1] - list all product name,their category name and name of a person, who sold that product.
+Ans - mysql> select p.pname Product_Name, c.cname Category_Name , s.sname salesman_Name
+    -> from product p , category c, salesman s
+    -> where p.cid=c.cid and p.sid=s.sid;
++---------------+---------------+---------------+
+| Product_Name  | Category_Name | salesman_Name |
++---------------+---------------+---------------+
+| Balaji        | Kurkare       | Totaram       |
+| Totamto_chips | Chips         | Babu          |
+| Good-Day      | Biscuit       | Sudhir        |
+| Marie         | Biscuit       | Bandu         |
+| Natural       | Biscuit       | Sudhir        |
++---------------+---------------+---------------+
+5 rows in set (0.00 sec)
+
+2] - list all product name and salesman name for all salesman who stays in pune
+Ans - mysql> select p.pname , s.sname ,s.address from product p  left join salesman s on p.sid=s.sid where s.address='pune';
++----------+--------+---------+
+| pname    | sname  | address |
++----------+--------+---------+
+| Good-Day | Sudhir | Pune    |
+| Natural  | Sudhir | Pune    |
++----------+--------+---------+
+2 rows in set (0.00 sec)
+
+3] - list all product name and category name
+Ans - mysql> select p.pname , c.cname
+    -> from product p, category c
+    -> where p.cid=c.cid;
++---------------+---------+
+| pname         | cname   |
++---------------+---------+
+| Balaji        | Kurkare |
+| Totamto_chips | Chips   |
+| Good-Day      | Biscuit |
+| Marie         | Biscuit |
+| Natural       | Biscuit |
++---------------+---------+
+5 rows in set (0.00 sec)
+
+Q55 - create following tables and solve following questions(primary keys are marked in yellow)
+foreign keys are marked in green.
+
+mysql> create table faculty(fid int primary key , fname varchar(25) not null , sp_skiled1 varchar(25) , sp_skilled2 varchar(25));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> create table room (roomid int primary key , rname varchar(20) , rloc varchar(20) not null);
+Query OK, 0 rows affected (0.07 sec) 
+
+mysql> create table courses(cid int primary key , cname varchar(25) , rid int , fid int ,
+    -> constraint fk_rid foreign key(rid) references room(roomid) ,
+    -> constraint fk_fid foreign key (fid) references faculty(fid));
+Query OK, 0 rows affected (0.13 sec)
+
+1] - list all courses for which no room is assigned and all rooms for which are 
+available.
+Ans - mysql> select* from courses where rid is null;
++-----+-------+------+------+
+| cid | cname | rid  | fid  |
++-----+-------+------+------+
+| 141 | DTISS | NULL | NULL |
++-----+-------+------+------+
+1 row in set (0.00 sec)
+
+2] - list all faculties who are not allocated to any course and rooms which are not 
+allocated to any course
+Ans - mysql> select f.fid , f.fname ,null roomid, null ename from faculty f
+    -> where not exists(select* from courses c where f.fid=c.fid)
+    -> union
+    -> select null , null ,r.roomid,r.rname from room r
+    -> where not exists(select* from courses c where r.roomid=c.rid);
++------+--------+--------+-------+
+| fid  | fname  | roomid | ename |
++------+--------+--------+-------+
+|   11 | Murali |   NULL | NULL  |
+|   13 | Mahi   |   NULL | NULL  |
+| NULL | NULL   |    103 | Mogra |
++------+--------+--------+-------+
+3 rows in set (0.00 sec)
+
+3] - list all rooms which are allocated or not allocated to any courses.
+Ans - mysql> select r.roomid ,r.rname ,c.cname from room r left join courses c  on r.roomid=c.rid;
++--------+--------+-------+
+| roomid | rname  | cname |
++--------+--------+-------+
+|    100 | jasmin | DBDA  |
+|    101 | Rose   | DAC   |
+|    103 | Mogra  | NULL  |
+|    105 | Lotus  | DIOT  |
++--------+--------+-------+
+4 rows in set (0.00 sec)
+
+4] - list all rooms which are not allocated to any course
+Ans - mysql> select r.roomid ,r.rname ,c.cname from room r left join courses c  on r.roomid=c.rid where c.cname is  null;
++--------+-------+-------+
+| roomid | rname | cname |
++--------+-------+-------+
+|    103 | Mogra | NULL  |
++--------+-------+-------+
+1 row in set (0.00 sec)
+
+5] - display courses and faculty assigned to those courses whose special skill is java
+Ans - mysql> select * from faculty where sp_skiled1='java' or sp_skilled2 ='java';
++-----+--------+------------+-------------+
+| fid | fname  | sp_skiled1 | sp_skilled2 |
++-----+--------+------------+-------------+
+|  11 | Murali | Java       | Python      |
+|  13 | Mahi   | C#         | Java        |
++-----+--------+------------+-------------+
+2 rows in set (0.00 sec)
+
+6] - display time table --- it should contain course details , faculty and room details
+Ans - mysql> select* from courses c join faculty f on f.fid=c.fid join room r on r.roomid = c.rid ;
++-----+-------+------+------+-----+--------+------------+-------------+--------+--------+-----------+
+| cid | cname | rid  | fid  | fid | fname  | sp_skiled1 | sp_skilled2 | roomid | rname  | rloc      |
++-----+-------+------+------+-----+--------+------------+-------------+--------+--------+-----------+
+| 121 | DBDA  |  100 |   10 |  10 | Jadhav | c          | c++         |    100 | jasmin | 1st Floor |
+| 151 | DIOT  |  105 |   12 |  12 | bandu  | C#         | Python      |    105 | Lotus  | 1st Floor |
++-----+-------+------+------+-----+--------+------------+-------------+--------+--------+-----------+
+2 rows in set (0.00 sec)
+
+Q56 - create following tables with given constraints
+1] - List all products with category chips
+Ans - mysql> select p.pname , p.prodid,p.Qty, c.cid from product2 p, category2 c where c.cid=p.catid and c.cname='chips';
++----------+--------+------+-----+
+| pname    | prodid | Qty  | cid |
++----------+--------+------+-----+
+| lays     |    123 |   30 |   1 |
+| Pringles |    125 |   40 |   1 |
+| Nachos   |    134 |   50 |   1 |
++----------+--------+------+-----+
+3 rows in set (0.00 sec)
+
+2] - display all products sold by kirti
+Ans - mysql> select p.pname , p.prodid , s.sname , s.sid from product2 p, saleman s  where p.sid=s.sid and s.sname='kirti';
++--------+--------+-------+-----+
+| pname  | prodid | sname | sid |
++--------+--------+-------+-----+
+| lays   |    123 | Kirti |  12 |
+| Nachos |    134 | Kirti |  12 |
++--------+--------+-------+-----+
+2 rows in set (0.00 sec)
+
+3] - display all salesman who do not sold any product
+Ans - mysql> select * from saleman
+    -> where not exists(select * from product2 where product2.sid=saleman.sid);
++-----+--------+--------+
+| sid | sname  | city   |
++-----+--------+--------+
+|  13 | Prasad | Nashik |
++-----+--------+--------+
+1 row in set (0.00 sec)
+
+4] - display all category for which no product is there
+Ans - mysql> select* from category2
+    -> where not exists (select* from product2 where product2.catid=category2.cid);
++-----+--------+-------------+
+| cid | cname  | description |
++-----+--------+-------------+
+|   3 | snacks | yummy       |
++-----+--------+-------------+
+1 row in set (0.00 sec)
+
+5] - display all products with no category assigned
+Ans - mysql> select* from category where cid is null;
+Empty set (0.00 sec)
+
+6] - list all salesman who stays in city with name starts with P or N
+Ans - mysql> select* from saleman
+    -> where city like 'P%' or city like 'N%';
++-----+--------+--------+
+| sid | sname  | city   |
++-----+--------+--------+
+|  11 | Rahul  | Pune   |
+|  13 | Prasad | Nashik |
++-----+--------+--------+
+2 rows in set (0.00 sec)
+
+7] - add new column in salesman table by name credit limit
+Ans - mysql> alter table saleman add credit_limit int ;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc saleman;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| sid          | int         | NO   | PRI | NULL    |       |
+| sname        | varchar(20) | NO   |     | NULL    |       |
+| city         | varchar(20) | YES  |     | NULL    |       |
+| credit_limit | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+

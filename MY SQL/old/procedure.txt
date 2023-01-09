@@ -1,0 +1,37 @@
+delimiter $
+create procedure update_price()
+begin
+declare v_vid int ;
+declare v_vname varchar(20);
+declare v_city varchar(20);
+declare v_price decimal(9,2);
+declare v_regfee decimal(9,2);
+declare v_stop int default 0;
+declare vehcur cursor for select vid , vname ,city ,price, regfee from vehicle;
+declare continue handler for NOT FOUND set v_stop=1;
+open vehcur;
+lable1:loop
+fetch vehcur into v_vid ,v_vname,v_city,v_price,v_regfee;
+if v_stop=1 then
+	leave lable1;
+end if;
+if  v_city='Pune' then
+	update vehicle 
+	set price = 1.1 * v_price ,regfee=0.01*price
+	where vid=v_vid;
+elseif v_city='Mumbai' then
+	update vehicle 
+	set price = 1.2 * v_price ,regfee=0.02*price
+	where vid=v_vid;
+elseif v_city='Nashik' then
+	update vehicle 
+	set price = 1.15 * v_price , regfee=0.015*price
+	where vid=v_vid;
+ else
+	update vehicle 
+	set price = 1.05 * v_price , regfee=0.015*price
+	where vid=v_vid;
+end if;
+end loop;
+close vehcur;
+end 

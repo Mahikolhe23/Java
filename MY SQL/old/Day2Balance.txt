@@ -1,0 +1,127 @@
+Q47 - list all employees who are working in purchase department
+Ans - mysql> select* from emp e
+    -> where deptno=(select deptno from dept where dname='purchase');
+Empty set (0.02 sec)
+
+Q48 - list all employees who earn more than average salary of their own department
+Ans - mysql> select* from emp e
+    -> where sal>(select avg(sal) from emp m
+    -> where m.deptno=e.deptno);
++-------+-------+-----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+-----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 |   NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+-------+-----------+------+------------+---------+--------+--------+
+6 rows in set (0.00 sec)
+
+Q49 - list all employees who earn sal < than their managers salary
+Ans - mysql> select e.empno,e.ename,e.mgr,e.sal,m.sal mgrsal , m.empno mgrno,m.ename mgrname from emp e inner join emp m on e.mgr=m.empno where e.sal<m.sal;
++-------+--------+------+---------+---------+-------+---------+
+| empno | ename  | mgr  | sal     | mgrsal  | mgrno | mgrname |
++-------+--------+------+---------+---------+-------+---------+
+|  7900 | JAMES  | 7698 |  950.00 | 2850.00 |  7698 | BLAKE   |
+|  7844 | TURNER | 7698 | 1500.00 | 2850.00 |  7698 | BLAKE   |
+|  7654 | MARTIN | 7698 | 1250.00 | 2850.00 |  7698 | BLAKE   |
+|  7521 | WARD   | 7698 | 1250.00 | 2850.00 |  7698 | BLAKE   |
+|  7499 | ALLEN  | 7698 | 1600.00 | 2850.00 |  7698 | BLAKE   |
+|  7934 | MILLER | 7782 | 1300.00 | 2450.00 |  7782 | CLARK   |
+|  7876 | ADAMS  | 7788 | 1100.00 | 3000.00 |  7788 | SCOTT   |
+|  7782 | CLARK  | 7839 | 2450.00 | 5000.00 |  7839 | KING    |
+|  7698 | BLAKE  | 7839 | 2850.00 | 5000.00 |  7839 | KING    |
+|  7566 | JONES  | 7839 | 2975.00 | 5000.00 |  7839 | KING    |
+|  7369 | SMITH  | 7902 |  800.00 | 3000.00 |  7902 | FORD    |
++-------+--------+------+---------+---------+-------+---------+
+11 rows in set (0.00 sec)
+
+
+Q50 - list all employees who are earning more than average salary of their job
+Ans - mysql> select* from emp e
+    -> where sal>(select avg(sal) from emp m where m.job=e.job);
++-------+--------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |   NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+--------+--------+
+6 rows in set (0.00 sec)
+
+
+Q51 - display employee name and department
+Ans - mysql> select emp.ename , dept.dname from emp , dept where emp.deptno=dept.deptno;
++--------+------------+
+| ename  | dname      |
++--------+------------+
+| SMITH  | RESEARCH   |
+| ALLEN  | SALES      |
+| WARD   | SALES      |
+| JONES  | RESEARCH   |
+| MARTIN | SALES      |
+| BLAKE  | SALES      |
+| CLARK  | ACCOUNTING |
+| SCOTT  | RESEARCH   |
+| KING   | ACCOUNTING |
+| TURNER | SALES      |
+| ADAMS  | RESEARCH   |
+| JAMES  | SALES      |
+| FORD   | RESEARCH   |
+| MILLER | ACCOUNTING |
++--------+------------+
+14 rows in set (0.00 sec)
+
+
+Q52 - display empno,name,department name and grade (use emp,dept and salgrade table)
+Ans - mysql> select emp.empno, emp.ename, dept.dname , grade from emp,dept,salgrade where emp.deptno=dept.deptno and emp.sal between salgrade.losal and salgrade.hisal;
++-------+--------+------------+-------+
+| empno | ename  | dname      | grade |
++-------+--------+------------+-------+
+|  7900 | JAMES  | SALES      |     1 |
+|  7876 | ADAMS  | RESEARCH   |     1 |
+|  7369 | SMITH  | RESEARCH   |     1 |
+|  7934 | MILLER | ACCOUNTING |     2 |
+|  7654 | MARTIN | SALES      |     2 |
+|  7521 | WARD   | SALES      |     2 |
+|  7844 | TURNER | SALES      |     3 |
+|  7499 | ALLEN  | SALES      |     3 |
+|  7902 | FORD   | RESEARCH   |     4 |
+|  7788 | SCOTT  | RESEARCH   |     4 |
+|  7782 | CLARK  | ACCOUNTING |     4 |
+|  7698 | BLAKE  | SALES      |     4 |
+|  7566 | JONES  | RESEARCH   |     4 |
+|  7839 | KING   | ACCOUNTING |     5 |
++-------+--------+------------+-------+
+14 rows in set (0.06 sec)
+
+
+Q53 list all employees number,name, mgrno and manager name
+Ans - mysql> select e.empno,e.ename,e.mgr, m.empno mgrno,m.ename mgrname from emp e inner join emp m on e.mgr=m.empno;
++-------+--------+------+-------+---------+
+| empno | ename  | mgr  | mgrno | mgrname |
++-------+--------+------+-------+---------+
+|  7902 | FORD   | 7566 |  7566 | JONES   |
+|  7788 | SCOTT  | 7566 |  7566 | JONES   |
+|  7900 | JAMES  | 7698 |  7698 | BLAKE   |
+|  7844 | TURNER | 7698 |  7698 | BLAKE   |
+|  7654 | MARTIN | 7698 |  7698 | BLAKE   |
+|  7521 | WARD   | 7698 |  7698 | BLAKE   |
+|  7499 | ALLEN  | 7698 |  7698 | BLAKE   |
+|  7934 | MILLER | 7782 |  7782 | CLARK   |
+|  7876 | ADAMS  | 7788 |  7788 | SCOTT   |
+|  7782 | CLARK  | 7839 |  7839 | KING    |
+|  7698 | BLAKE  | 7839 |  7839 | KING    |
+|  7566 | JONES  | 7839 |  7839 | KING    |
+|  7369 | SMITH  | 7902 |  7902 | FORD    |
++-------+--------+------+-------+---------+
+13 rows in set (0.00 sec)
+
+Q54 - create following tables and solve following questions(primary keys are marked in yellow).
+Ans - 
+
