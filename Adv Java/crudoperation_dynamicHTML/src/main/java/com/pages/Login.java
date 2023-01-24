@@ -43,12 +43,13 @@ public class Login extends HttpServlet {
 		try (PrintWriter pw = response.getWriter()) {
 			User user = userDAL.userAuth(request.getParameter("email"), request.getParameter("password"));
 			if (user != null) {
-				pw.write("<h1>Welcome to Portal " + user.getName() + "</h1>");
-				pw.write("<h2>" + user + "</h2>");
+				pw.write("<h1>Welcome to Portal </h1>");
+				pw.write("<h2>" + "User : " + user.getName() + "</h2>");
 				pw.write("<h2>List of Topics</h2>");
 				list = topicDAL.getAlltopics();
-				pw.write("<h3>" + list.toString() + "</h3>");
-				
+				for (int i = 0; i < list.size(); i++) {
+					pw.write("<h2>" + list.get(i).getName() + "<a href='list.get(i).getName()'>click</a>" + "</h2>");
+				}
 			} else {
 				pw.write("<h1>Invalid User</h1>");
 			}
