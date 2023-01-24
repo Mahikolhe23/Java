@@ -12,6 +12,7 @@ Servers/
 Other/
 build/
 static files/
+target/
 
 
 
