@@ -15,4 +15,11 @@ public interface EmployeeDao {
 
 	// list of emp with specific details
 	List<Employee> getEmpWithSpecificDetails();
+
+	// Transfer emp to a new department n salary raise, having specified first name
+	// n last name
+	String transferAndRaise(String fn, String ln, Department dept, double sal);
+
+	// delete all temp emp
+	String deleteAllTempEmp(Department dept);
 }

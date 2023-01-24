@@ -26,7 +26,16 @@ public class Test {
 //		list.forEach(System.out::println);
 
 		// 3 list with specific details
-		List<Employee> list = newEmp.getEmpWithSpecificDetails();
-		list.forEach(System.out::println);
+//		List<Employee> list = newEmp.getEmpWithSpecificDetails();
+//		list.forEach(System.out::println);
+
+		// 4 Transfer emp to a new department n salary raise, having specified first
+		// name n last name
+		// System.out.println(newEmp.transferAndRaise(in.next(), in.next(),
+		// Department.valueOf(in.next()), in.nextDouble()));
+
+		// 5 delete all temp emp
+		System.out.println("Enter dept to delete all emp");
+		System.out.println(newEmp.deleteAllTempEmp(Department.valueOf(in.next())));
 	}
 }

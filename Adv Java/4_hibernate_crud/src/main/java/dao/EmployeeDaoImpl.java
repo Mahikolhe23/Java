@@ -79,4 +79,48 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return emps;
 	}
+
+	@Override
+	public String transferAndRaise(String fn, String ln, Department dept, double sal) {
+		String jpql = "select e from Employee e where e.firstName=:first and e.lastName=:last";
+		// 1. get session from SF
+		Session session = getFactory().getCurrentSession();
+		Employee emp = null;
+		String msg = "Failed";
+		// 2. begin a tx
+		Transaction tx = session.beginTransaction();
+		try {
+			emp = session.createQuery(jpql, Employee.class).setParameter("first", fn).setParameter("last", ln)
+					.getSingleResult();
+			emp.setDept(dept);
+			emp.setSalary(sal);
+			msg = "success";
+			tx.commit();
+		} catch (RuntimeException e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
+
+	@Override
+	public String deleteAllTempEmp(Department department) {
+		String jpql = "select e from Employee e where e.dept=:dept";
+		String msg = "failed";
+		List<Employee> list = null;
+		Session session = getFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			list = session.createQuery(jpql, Employee.class).setParameter("dept", department).getResultList();
+			list.forEach(e -> session.delete(e));
+			msg = "success" + list.size();
+			tx.commit();
+		} catch (RuntimeException e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
 }

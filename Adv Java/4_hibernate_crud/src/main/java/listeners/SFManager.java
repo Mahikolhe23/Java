@@ -22,7 +22,7 @@ public class SFManager implements ServletContextListener {
          System.out.println("in ctx destroyed");
          HibernateUtils.getFactory().close();
     }
-
+	
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
