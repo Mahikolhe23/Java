@@ -11,5 +11,6 @@
 	<h3>
 		Welcome 2 Web App with Hibernate @
 		<%=new Date()%></h3>
+	<a href="login.jsp">Login</a>
 </body>
 </html>

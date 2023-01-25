@@ -35,7 +35,7 @@ public class Test {
 		// Department.valueOf(in.next()), in.nextDouble()));
 
 		// 5 delete all temp emp
-		System.out.println("Enter dept to delete all emp");
-		System.out.println(newEmp.deleteAllTempEmp(Department.valueOf(in.next())));
+//		System.out.println("Enter dept to delete all emp");
+//		System.out.println(newEmp.deleteAllTempEmp(Department.valueOf(in.next())));
 	}
 }
