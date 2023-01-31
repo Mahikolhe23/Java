@@ -13,6 +13,6 @@ Other/
 build/
 static files/
 target/
-
+.mvn/
 
 
