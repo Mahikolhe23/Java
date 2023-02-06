@@ -48,4 +48,14 @@ public class StudentServiceImpl implements StudentService {
 		}
 		throw new CustomExpception("Student not FOund");
 	}
+
+	@Override
+	public List<Student> getStudentByName(String key) {
+		return studentrepo.findByLastNameContaining(key);
+	}
+
+	@Override
+	public Student getStudentByEmail(String email) {
+		return studentrepo.getStudentwithEmail(email);
+	}
 }

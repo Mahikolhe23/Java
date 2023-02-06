@@ -14,4 +14,8 @@ public interface StudentService {
 	Student getStudentById(long id);
 
 	Student upateStudentDetails(Student student);
+
+	List<Student> getStudentByName(String key);
+
+	Student getStudentByEmail(String email);
 }
